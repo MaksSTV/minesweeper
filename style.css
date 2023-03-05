@@ -9,12 +9,6 @@ body{
     display: flex;
     flex-direction: column;
     max-width: 270px;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    -moz-user-select: -moz-none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .header{
