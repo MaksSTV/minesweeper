@@ -4,7 +4,7 @@ let TIME = 2400;
 let finishGame = false;
 
 smile.addEventListener('click', (event) =>{
-    startGame(16, 16 , 60);
+    startGame(16, 16 , 40);
     TIME = 2400;
     finishGame = false;
 });
@@ -348,7 +348,7 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
 
 }
 
-startGame(16, 16 , 60);
+startGame(16, 16 , 40);
 
 
 setInterval(updateCountDown, 1000);
