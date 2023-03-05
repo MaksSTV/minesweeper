@@ -1,4 +1,5 @@
-# Сапер
+# Сапер 
+### [Minesweeper](https://startling-figolla-4a2621.netlify.app)
 
 ## Описание 
 
@@ -21,5 +22,3 @@
 
 + Если кликнуть ПКМ по флажку, ставится вопрос, еще раз - выделение снимается.
 + Клик по смайлику перезапускает игру.
-
-[Minesweeper](https://startling-figolla-4a2621.netlify.app)
