@@ -1,0 +1,82 @@
+body{
+    background-color: #b8bb6b9b;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: 270px;
+}
+
+.header{
+    background-color: #a5a5a5;
+    border: 7px solid #8c8c8c;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.timer__min{
+    height: 26px;
+    width: 39px;
+    display: flex;
+}
+
+.timer__sec{
+    height: 26px;
+    width: 39px;
+    display: flex;
+}
+
+.zero,
+.digit__min1,
+.digit__min2,
+.digit__sec1,
+.digit__sec2{
+    height: 100%;
+    width: 13px;
+    background-image: url(/sprite.png);
+    background-repeat: no-repeat;
+    background-position: -126px 2px;
+    cursor: pointer;
+    border: none;
+}
+
+
+.smile{
+    height: 26px;
+    width: 26px;
+    background-image: url(/sprite.png);
+    background-repeat: no-repeat;
+    background-position: 0px -24px;
+    cursor: pointer;
+    border: none;
+}
+
+.field {
+    display: grid;
+    grid-template-columns: repeat(16, 16px);
+    border: 7px solid #8c8c8c;
+    
+}
+
+.field button{
+    height: 16px;
+    background-image: url(/sprite.png);
+    background-repeat: no-repeat;
+    background-position: 0px -51px;
+    cursor: pointer;
+    border: none;
+}
+
+button:disabled{
+    background-image: url(/sprite.png);
+    background-repeat: no-repeat;
+    background-position: -17px -51px;
+    cursor: auto;
+}
