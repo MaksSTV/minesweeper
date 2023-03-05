@@ -37,7 +37,8 @@ body{
 .digit__min1,
 .digit__min2,
 .digit__sec1,
-.digit__sec2{
+.digit__sec2,
+.digit__sec3{
     height: 100%;
     width: 13px;
     background-image: url(/sprite.png);

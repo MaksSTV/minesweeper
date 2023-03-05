@@ -1,12 +1,18 @@
 const field = document.querySelector(".field");
 const smile = document.querySelector(".smile");
-let TIME = 2400;
+let TIME = 0;
 let finishGame = false;
+let flags = [];
+let questions = [];
+let bombsRemains = 40;
 
 smile.addEventListener('click', (event) =>{
     startGame(16, 16 , 40);
-    TIME = 2400;
+    TIME = 0;
     finishGame = false;
+    bombsRemains = 40;
+    flags = [];
+    questions = [];
 });
 
 smile.addEventListener('mousedown', (event) =>{
@@ -61,8 +67,7 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
     const cellsCount = WIDTH * HEIGHT;
     field.innerHTML = '<button></button>'.repeat(cellsCount)
     const cells = [...field.children];
-    const flags = [];
-    const questions = [];
+    
 
     let FIRST_CLICK = true;
 
@@ -77,7 +82,7 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
         if(event.target.tagName !== 'BUTTON'){
             return;
         }
-
+        
         
         const index = cells.indexOf(event.target);
 
@@ -100,6 +105,9 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
             return;
         }
         const index = cells.indexOf(event.target);
+        if(index === -1){
+            return;
+        }
         
         if(flags.includes(index)){
             let index_delete = flags.indexOf(index);
@@ -129,6 +137,8 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
             background-position: 0px -51px;
             `;
         }
+        console.log(flags);
+        console.log(questions);
     });
 
     
@@ -158,13 +168,22 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
 
     function open(row, column){
         if(isBomb(row, column) && FIRST_CLICK === true){
+            const elem_replace = row * WIDTH + column;
+            for(let i = 0; i < 16; i++){
+                if(!bombs.includes(i)){
+                    let index_replace = bombs.indexOf(elem_replace);
+                    bombs.splice(index_replace, 1, i);
+                }
+            }
+            //console.log(bombs)
+            /*
             const elem_delete = row * WIDTH + column;
             let index_delete = bombs.indexOf(elem_delete);
-            bombs.splice(index_delete, 1);
+            bombs.splice(index_delete, 1);*/
             //console.log(bombs)
             FIRST_CLICK = false;
             //console.log(BOMBS_COUNT);
-            BOMBS_COUNT--;
+            //BOMBS_COUNT--;
             //console.log(BOMBS_COUNT);
         }
         FIRST_CLICK = false;
@@ -240,9 +259,12 @@ function startGame(WIDTH, HEIGHT, BOMBS_COUNT){
             alert("You loose!!!");
             return;
         }
-
+        //console.log(closedCount);
+        //console.log(closedCount - BOMBS_COUNT);
+        //console.log(256 - closedCount);
         closedCount--;
         //console.log(closedCount);
+
         if(closedCount <= BOMBS_COUNT){
             smile.style.cssText=`
                 background-image: url(/sprite.png);
@@ -356,10 +378,11 @@ setInterval(updateCountDown, 1000);
 
 
 
-const digitMin1 = document.querySelector(".digit__min1");
-const digitMin2 = document.querySelector(".digit__min2");
+const digitMine1 = document.querySelector(".digit__min1");
+const digitMine2 = document.querySelector(".digit__min2");
 const digitSec1 = document.querySelector(".digit__sec1");
 const digitSec2 = document.querySelector(".digit__sec2");
+const digitSec3 = document.querySelector(".digit__sec3");
 
 
 
@@ -451,15 +474,22 @@ function setDigit(elem, digit){
 }
 
 function updateCountDown(){
-    const minutes = Math.floor(TIME / 60);
-    let seconds = TIME % 60;
+    //console.log(flags);
+    //console.log(questions);
+    bombsRemains = 40 - flags.length - questions.length;
+    //console.log(bombsRemains);
 
-    setDigit(digitMin1, Math.floor(minutes/10));
-    setDigit(digitMin2, minutes%10);
-    setDigit(digitSec1, Math.floor(seconds/10));
-    setDigit(digitSec2, seconds%10);
+
+    
+    let seconds = TIME;
+
+    setDigit(digitMine1, Math.floor(bombsRemains/10));
+    setDigit(digitMine2, bombsRemains%10);
+    setDigit(digitSec1, Math.floor(seconds/100));
+    setDigit(digitSec2, Math.floor(seconds/10)%10);
+    setDigit(digitSec3, seconds%10);
     if(!finishGame){
-        TIME--;
+        TIME++;
     }
 }
 
